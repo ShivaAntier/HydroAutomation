@@ -2,10 +2,7 @@ package TestCases;
 
 import Helper.BaseClass;
 import PageObjects.LandingScreen;
-import org.openqa.selenium.By;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -26,7 +23,7 @@ public class LandingScreenTestCases extends BaseClass {
 
     @AfterMethod
     void testCLose() throws InterruptedException {
-        Thread.sleep(3000);
+        Thread.sleep(1000);
         driver.quit();
     }
 
@@ -44,30 +41,17 @@ public class LandingScreenTestCases extends BaseClass {
     }
 
     @Test
-    void signUpWithEmail() {
+    void signUpWithEmailMandatoryFields() {
         landingScreen.signUpWithEmail().click();
-        int i = 1;
-        boolean b = true;
-        while (b) {
-            switch (i) {
-                //Checking if the mandatory filed are giving error if the field are kept empty
-                case 1:
-                    landingScreen.fullName().click();
-                    landingScreen.email().click();
-                    landingScreen.password().click();
-                    landingScreen.confirmPassword().click();
-                    landingScreen.checkbox().click();
-                    Assert.assertEquals("This field is mandatory.", driver.findElement(By.xpath("//form[@class='register']/div[1]/p")).getText());
-                    Assert.assertEquals("This field is mandatory.", driver.findElement(By.xpath("//form[@class='register']/div[2]/p")).getText());
-                    Assert.assertEquals("This field is mandatory.", driver.findElement(By.xpath("//form[@class='register']/div[3]/p")).getText());
-                    Assert.assertEquals("This field is mandatory.", driver.findElement(By.xpath("//form[@class='register']/div[4]/p")).getText());
-                    break;
-
-                case 2 :
-
-
-
-            }
-        }
+        landingScreen.fullName().click();
+        landingScreen.email().click();
+        landingScreen.password().click();
+        ((JavascriptExecutor)driver).executeScript("window.scrollBy(0,250","");
+        landingScreen.confirmPassword().click();
+        landingScreen.checkbox().click();
+        Assert.assertEquals("This field is mandatory.", driver.findElement(By.xpath("//form[@class='register']/div[1]/p")).getText());
+        Assert.assertEquals("This field is mandatory.", driver.findElement(By.xpath("//form[@class='register']/div[2]/p")).getText());
+        Assert.assertEquals("This field is mandatory.", driver.findElement(By.xpath("//form[@class='register']/div[3]/p")).getText());
+        Assert.assertEquals("This field is mandatory.", driver.findElement(By.xpath("//form[@class='register']/div[4]/p")).getText());
     }
 }

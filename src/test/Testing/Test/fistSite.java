@@ -24,7 +24,6 @@ public class fistSite {
 //            new Actions(driver).click().perform();
             driver.findElement(By.xpath("//button[@type='button']")).click();
             Thread.sleep(15000);
-
             i++;
             if (i > 2000) {
                 break;
